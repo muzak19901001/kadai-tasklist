@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy, :edit, :update]
   
 
   def create
@@ -22,11 +22,9 @@ class TasksController < ApplicationController
   end
   
   def edit
-    @task = current_user.tasks.find(params[:id])
   end
   
   def update
-    @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       flash[:success] = 'タスクを編集しました'
       redirect_to root_url
